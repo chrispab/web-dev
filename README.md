@@ -17,4 +17,8 @@ docker exec -it php-apache bash
 cd vhosts/gotri_new
 
 # set perms for pimcore
+
 chown -R www-data:www-data pimcore website/var
+
+local hosts add
+127.0.0.1 dev.gotri.org dev-intranet.britishtriathlon.org dev.test.britishtriathlon.org dev.britishtriathlon.org
