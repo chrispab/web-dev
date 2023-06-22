@@ -12,7 +12,9 @@ volumes:
 - ${PWD}/config/start.sql:/docker-entrypoint-initdb.d/start.sql
 
 # LOG INTO web server BASH
-docker exec -it php-apache bash
 
-set perms for pimcore
+docker exec -it php-apache bash
+cd vhosts/gotri_new
+
+# set perms for pimcore
 chown -R www-data:www-data pimcore website/var
