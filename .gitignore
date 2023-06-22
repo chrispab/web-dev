@@ -1,0 +1,10 @@
+# database-data/*
+
+# /database-data/**/*
+# !/database-data/**/
+# !/database-data/**/info.txt
+
+
+# /db_import_data/*.sql
+/www/vhosts/*
+
