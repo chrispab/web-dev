@@ -22,3 +22,11 @@ chown -R www-data:www-data pimcore website/var
 
 local hosts add
 127.0.0.1 dev.gotri.org dev-intranet.britishtriathlon.org dev.test.britishtriathlon.org dev.britishtriathlon.org
+
+# useful Docker commands
+
+docker ps
+docker ps -all
+docker ps -a
+docker compose up
+docker compose down
