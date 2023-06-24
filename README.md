@@ -30,3 +30,20 @@ docker ps -all
 docker ps -a
 docker compose up
 docker compose down
+
+/home/chris/dev/docker/web-dev/www/vhosts/gotri_new/website/var/config/system.php
+has
+
+"database" => [
+        "adapter" => "Pdo_Mysql",
+        "params" => [
+            "username" => "root",
+            "password" => "triathlon123",
+            "dbname" => "pimcore_gotri",
+            "host" => "mariadb",
+            "port" => "3306"
+        ]
+    ],
+
+xdebug
+<https://stackoverflow.com/questions/49907308/installing-xdebug-in-docker>

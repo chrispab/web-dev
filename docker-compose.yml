@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./services/php_apache/Dockerfile
+# build -t baeldung_greetings --build-arg name=Baeldung .
     container_name: php-apache
     ports:
       - "${APP_PORT}:80"
