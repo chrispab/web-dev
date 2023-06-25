@@ -35,6 +35,8 @@ env vars in dockerfile
 run from project root folder
 
 `sudo sed -i 's/"host" => "localhost"/"host" => "mariadb"/' www/vhosts/website/website/var/config/system.php`
+`sudo sed -i 's/"host" => "localhost"/"host" => "xmariadbx"/' www/vhosts/website/website/var/config/system.php`
+
 #### apply pimcore permissions
 ```
 docker exec -it php-apache bash
@@ -119,3 +121,4 @@ cd vhosts/website
 #### set perms for pimcore
 
 chown -R www-data:www-data pimcore website/var
+docker-compose --verbose up

@@ -12,6 +12,12 @@ RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
 
 RUN apt-get update && apt-get install -y git unzip zip
 
+# WORKDIR /var/www
+
+#set db service hostname in pimcore system.php
+# RUN ls -a
+# RUN sed -i 's/"host" => "localhost"/"host" => "mariadbYYY"/' www/vhosts/website/website/var/config/system.php
+
 #ENV TZ = Europe/London
 
 WORKDIR /var/www
@@ -39,3 +45,4 @@ RUN echo "xdebug.default_enable=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
 
 
 COPY --from=composer:2.0 /usr/bin/composer /usr/local/bin/composer
+# CMD tail -f /dev/null
