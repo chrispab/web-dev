@@ -28,6 +28,18 @@ run from project root folder
 
 `docker exec -i mariadb mysql -uroot -ptriathlon123 pimcore < db_import_data/pimcore.sql`
 
+### Setup SwimBikeRun
+SBR is effectively a fork of GOTRI atm, renamed as http://dev.swimbikerun.britishtriathlon.org/
+#### import pimcore_sbr db
+run from project root folder
+`docker exec -i mariadb mysql -uroot -ptriathlon123 pimcore_sbr < db_import_data/pimcore_sbr.sql`
+
+#### import gotri db
+run from project root folder
+`docker exec -i mariadb mysql -uroot -ptriathlon123 gotri < db_import_data/gotri.sql`
+
+check db is correct in /var/www/vhosts/sbr/website/var/config/system.php
+
 
 
 env vars in dockerfile
@@ -122,3 +134,36 @@ cd vhosts/website
 
 chown -R www-data:www-data pimcore website/var
 docker-compose --verbose up
+
+
+###Submodules
+add each repo as a submodule in the docker dev environment
+within vhosts
+add gotri as a submodule named in folder sbr
+current live gotri is in repo 'gotri_latest'
+https://bitbucket.org/britishtriathlon/gotri_latest/src/master/
+git clone git@bitbucket.org:britishtriathlon/gotri_latest.git
+git submodule add git@bitbucket.org:britishtriathlon/gotri_latest.git sbr
+
+
+/home/chris/.ssh/known_hosts:4
+
+
+git remote add origin_bitbucket git@bitbucket.org:britishtriathlon/gotri_latest.git
+
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+git pull origin_bitbucket master
+
+git clone git@bitbucket.org:britishtriathlon/gotri_latest.git sbr
+
+#hosts additions
+```
+127.0.0.1 dev.gotri.org
+127.0.0.1 dev.intranet.britishtriathlon.org
+127.0.0.1 dev.test.britishtriathlon.org
+127.0.0.1 dev.britishtriathlon.org
+127.0.0.1 dev.swimbikerun.britishtriathlon.org
+```
