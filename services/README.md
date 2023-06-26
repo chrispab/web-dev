@@ -34,13 +34,20 @@ SBR is effectively a fork of GOTRI atm, renamed as http://dev.swimbikerun.britis
 run from project root folder
 `docker exec -i mariadb mysql -uroot -ptriathlon123 pimcore_sbr < db_import_data/pimcore_sbr.sql`
 
-#### import gotri db
+### eos
+copy over web folder
+
 run from project root folder
-`docker exec -i mariadb mysql -uroot -ptriathlon123 gotri < db_import_data/gotri.sql`
+`docker exec -i mariadb mysql -uroot -ptriathlon123 eos < db_import_data/eos.sql`
+
+in www/vhosts/eos/application/config/database.php
+change db host from local to mariadb
 
 check db is correct in /var/www/vhosts/sbr/website/var/config/system.php
 
-
+#### import gotri db
+run from project root folder
+`docker exec -i mariadb mysql -uroot -ptriathlon123 gotri < db_import_data/gotri.sql`
 
 env vars in dockerfile
 #### mod settings for db host to mariadb
@@ -162,8 +169,9 @@ git clone git@bitbucket.org:britishtriathlon/gotri_latest.git sbr
 #hosts additions
 ```
 127.0.0.1 dev.gotri.org
-127.0.0.1 dev.intranet.britishtriathlon.org
-127.0.0.1 dev.test.britishtriathlon.org
-127.0.0.1 dev.britishtriathlon.org
-127.0.0.1 dev.swimbikerun.britishtriathlon.org
+127.0.0.1 dev-intranet.britishtriathlon.org
+127.0.0.1 dev-test.britishtriathlon.org
+127.0.0.1 dev-www.britishtriathlon.org
+127.0.0.1 dev-swimbikerun.britishtriathlon.org
+127.0.0.1 dev-events.britishtriathlon.org
 ```

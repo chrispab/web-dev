@@ -1,18 +1,11 @@
-# version: '3.9'
-
 services:
   php_apache:
     build:
       context: ./services/php_apache
-      # dockerfile: ./services/php_apache/Dockerfile
-      # args:
-      #   DB_HOST_NAME: "${DB_SERVICE_HOST_NAME}"
-      # build -t baeldung_greetings --build-arg name=Baeldung .
     container_name: php-apache
     ports:
       - "${APP_PORT}:80"
       - '443:443'
-      # - '9000:9000'
       # expose:
       #   - 9000
     working_dir: /var/www
@@ -21,26 +14,18 @@ services:
       - ./services/php_apache/apache/sites-enabled/site.conf:/etc/apache2/sites-available/000-default.conf
       - ./services/php_apache/ssl:/etc/apache2/ssl
       - ./services/php_apache/php/php.ini:/usr/local/etc/php/conf.d/extra-php-config.ini
-    # command: bash -c "echo "baeldung" && echo "docker" "
     depends_on:
       - mariadb
-    # tty: true
-    # command: bash -c "echo "baeldung" && echo "docker" "
     # command: bash -c "sed -i 's/\"host\" => \"localhost\"/\"host\" => \"${DB_SERVICE_HOST_NAME}\"/' /var/www/vhosts/website/website/var/config/system.php && apache2-foreground"
     # command: bash -c setup.sh
-    # entrypoint: setup.sh
-    entrypoint: [ "bash", "-c", "chmod +x setup.sh && sh setup.sh"]
-        # entrypoint: [ "bash", "-c", "chmod +x /scripts/rs-init.sh && sh /scripts/rs-init.sh"]
-    # command: tail -f /dev/null
+    entrypoint: [ "bash", "-c", "chmod +x setup.sh && sh setup.sh" ]
+    # entrypoint: [ "bash", "-c", "chmod +x /scripts/rs-init.sh && sh /scripts/rs-init.sh"]
     networks:
       - app-network
 
   mariadb:
     image: mariadb:10.0.38
     hostname: "${DB_SERVICE_HOST_NAME}"
-        #   some-network:
-        # aliases:
-        #   - alias1
     container_name: "${DB_SERVICE_HOST_NAME}"
     restart: unless-stopped
     ports:
@@ -59,10 +44,9 @@ services:
       interval: 15s
       retries: 5
     networks:
-        # app-network
       app-network:
         aliases:
-          - alias1
+          - mariadb2
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.2
@@ -79,5 +63,3 @@ services:
 
 networks:
   app-network:
-  # back-tier:
-  # admin:
