@@ -20,3 +20,4 @@ rsync -anvP ~/dev/docker/web-dev /media/chris/sabrent
 
 rsync -anvP --delete ~/dev/docker/web-dev /media/chris/sabrent
 
+rsync -anvP --delete ~/dev/docker/web-dev /media/chris/m2
