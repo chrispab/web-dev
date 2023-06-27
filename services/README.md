@@ -7,9 +7,9 @@
 127.0.0.1 dev-www.britishtriathlon.org
 127.0.0.1 dev-swimbikerun.britishtriathlon.org
 127.0.0.1 dev-events.britishtriathlon.org
+127.0.0.1 dev-uploads.britishtriathlon.org
 
-additional?
-const UPLOADS_URL = 'http://dev.uploads.britishtriathlon.org/';// to local upload dir for mem images etc
+
 ```
 
 -------------------------website-------------------
@@ -77,7 +77,9 @@ run from project root folder
         "debug" => TRUE,
         "debug_ip" => "",
 
-"SQLSTATE[HY000]: General error: 1449 The user specified as a definer ('pimcore'@'131.231.186.3') does not exist, query was: SELECT SQL_CALC_FOUND_ROWS object_1.o_id as o_id, `object_1`.`o_type` FROM `object_1` WHERE ((domain = 'dev-intranet.britishtriathlon.org'  AND  object_1.o_type IN ('object','folder')) AND object_1.o_published = 1) LIMIT 1"
+```
+SQLSTATE[HY000]: General error: 1449 The user specified as a definer ('pimcore'@'131.231.186.3') does not exist, query was: SELECT SQL_CALC_FOUND_ROWS object_1.o_id as o_id, `object_1`.`o_type` FROM `object_1` WHERE ((domain = 'dev-intranet.britishtriathlon.org'  AND  object_1.o_type IN ('object','folder')) AND object_1.o_published = 1) LIMIT 1
+```
 
 https://stackoverflow.com/questions/10169960/mysql-error-1449-the-user-specified-as-a-definer-does-not-exist
 
@@ -103,12 +105,13 @@ in www/vhosts/eos/application/config/database.php
 change db host from local to mariadb
 
 in www/vhosts/eos/application/config/config.php
+```
 $config['base_url']	= 'http://dev.events.britishtriathlon.org/';
 $config['base_url']	= 'http://dev-events.britishtriathlon.org/';
 
 $config['uploads_url'] = 'http://dev.uploads.britishtriathlon.org/';
 $config['uploads_url'] = 'http://dev-uploads.britishtriathlon.org/';
-
+```
 
 
 ------------------sbr
@@ -121,6 +124,16 @@ run from project root folder
 
 check db is correct in /var/www/vhosts/sbr/website/var/config/system.php
 
+
+
+
+
+---------------------gotri
+
+'gotri' db
+'pimcore_gotri' db
+
+'gotri_new' web folder
 #### import gotri db
 run from project root folder
 `docker exec -i mariadb mysql -uroot -ptriathlon123 gotri < db_import_data/gotri.sql`
@@ -138,87 +151,15 @@ docker exec -it php-apache bash
 cd vhosts/website
 chown -R www-data:www-data pimcore website/var
 ```
-#### set perms for pimcore
-
-`chown -R www-data:www-data pimcore website/var`
-
+#### run from project root folder
+```
+docker exec -i mariadb mysql -uroot -ptriathlon123 gotri < db_import_data/gotri.sql
+docker exec -i mariadb mysql -uroot -ptriathlon123 pimcore_gotri < db_import_data/pimcore_gotri.sql
+```
 ---
 
 
-## Setting up gotri site and DB
-
-'gotri' db
-'pimcore_gotri' db
-
-'gotri_new' web folder
-
-#### run from project root folder
-
-docker exec -i mariadb mysql -uroot -ptriathlon123 gotri < db_import_data/gotri.sql
-docker exec -i mariadb mysql -uroot -ptriathlon123 pimcore_gotri < db_import_data/pimcore_gotri.sql
-
-#### LOG INTO web server BASH
-
-docker exec -it php-apache bash
-cd vhosts/gotri_new
-
-#### set perms for pimcore
-
-chown -R www-data:www-data pimcore website/var
-
-## Setting up gotri site and DB
-
-docker exec -i mariadb mysql -uroot -ptriathlon123 btf_test < db_import_data/btf_test.sql
-
-<!-- docker exec -i btf_5.6_projects-db mysql -uroot -ptriathlon123 pimcore_gotri < ../webproject/database-to-import/pimcore_gotri.sql -->
-
-### Setting up intranet site
-
-
-**web folder: 'intranet'**
-**db: 'iweb_new'**
-#### copy web folder into www/vhosts
-#### import db to docker
-run from project root folder
-
-add
-```
-CREATE DATABASE iweb_new;
-USE iweb_new;
-```
-
-import db
-run from project root folder
-
-```
-docker exec -i mariadb mysql -uroot -ptriathlon123 iweb_new < db_import_data/iweb_new.sql
-```
-#### LOG INTO web server BASH
-
-docker exec -it php-apache bash
-cd vhosts/gotri_new
-
-#### set perms for pimcore
-
-chown -R www-data:www-data pimcore website/var
-
-#### Setting up gotri site and DB
-
-docker exec -i mariadb mysql -uroot -ptriathlon123 btf_test < db_import_data/btf_test.sql
-
-<!-- docker exec -i btf_5.6_projects-db mysql -uroot -ptriathlon123 pimcore_gotri < ../webproject/database-to-import/pimcore_gotri.sql -->
-
-#### LOG INTO web server BASH
-
-docker exec -it php-apache bash
-cd vhosts/website
-
-#### set perms for pimcore
-
-chown -R www-data:www-data pimcore website/var
-docker-compose --verbose up
-
-
+---
 ###Submodules
 add each repo as a submodule in the docker dev environment
 within vhosts
@@ -228,8 +169,6 @@ https://bitbucket.org/britishtriathlon/gotri_latest/src/master/
 git clone git@bitbucket.org:britishtriathlon/gotri_latest.git
 git submodule add git@bitbucket.org:britishtriathlon/gotri_latest.git sbr
 
-
-/home/chris/.ssh/known_hosts:4
 
 
 git remote add origin_bitbucket git@bitbucket.org:britishtriathlon/gotri_latest.git
