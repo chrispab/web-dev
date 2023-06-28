@@ -1,0 +1,23 @@
+{
+    "intelephense.environment.documentRoot": "www/vhosts",
+    "intelephense.environment.includePaths": [
+        "www/vhosts"
+    ],
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 33016,
+            "driver": "MySQL",
+            "name": "sbr",
+            "group": "btf",
+            "database": "pimcore_sbr",
+            "username": "root",
+            "password": "triathlon123"
+        }
+    ]
+}
