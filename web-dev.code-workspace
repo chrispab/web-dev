@@ -1,10 +1,26 @@
 {
-    "folders": [
-        {
-            "path": ".vscode"
-        },
-        {
-            "path": "."
-        }
-    ]
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"mysqlOptions": {
+					"authProtocol": "default",
+					"enableSsl": "Disabled"
+				},
+				"previewLimit": 50,
+				"server": "localhost",
+				"port": 33016,
+				"driver": "MariaDB",
+				"name": "SBR",
+				"group": "BTF",
+				"database": "pimcore_sbr",
+				"username": "root",
+				"password": "triathlon123"
+			}
+		]
+	}
 }

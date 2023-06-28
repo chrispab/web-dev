@@ -144,8 +144,10 @@ run from project root folder
 
 `sudo sed -i 's/"host" => "localhost"/"host" => "mariadb"/' www/vhosts/website/website/var/config/system.php`
 `sudo sed -i 's/"host" => "localhost"/"host" => "xmariadbx"/' www/vhosts/website/website/var/config/system.php`
-check db is correct in /var/www/vhosts/sbr/website/var/config/system.php
-        "domain" => "dev-www.gotri.org",
+check db is correct in /var/www/vhosts/gotri_new/website/var/config/system.php
+"domain" => "dev-www.gotri.org",
+        "debug" => TRUE,
+            "host" => "mariadb",
 
 #### apply pimcore permissions
 ```
