@@ -25,6 +25,8 @@ rsync -anvP --delete ~/dev/docker/web-dev /media/chris/m2
 
 h:sabrent to backup
 sudo rsync -anvP /media/chris/sabrent/web-dev ~/dev/backups/
+sudo rsync -anvP /media/chris/sabrent/web-dev ~/dev/backups2/
+
 sudo rsync -anvP ~/dev/backups/web-dev /media/chris/sabrent/
 
 
