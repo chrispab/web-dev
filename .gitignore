@@ -7,4 +7,5 @@
 
 # /db_import_data/*.sql
 /www/vhosts/*
+*.tar
 
