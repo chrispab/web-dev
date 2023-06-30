@@ -16,39 +16,6 @@ Change your matching pattern no catch white spaces before liste in the following
 www/vhosts/website/website/var/config/system.php
 sudo sed -i 's/"host" => "localhost"/"host" => "mariadb"/' www/vhosts/website/website/var/config/system.php
 
-rsync -anvP ~/dev/docker/web-dev /media/chris/sabrent
-
-rsync -anvP --delete ~/dev/docker/web-dev /media/chris/sabrent
-
-rsync -anvP --delete ~/dev/docker/web-dev /media/chris/m2
-
-
-h:sabrent to backup
-sudo rsync -anvP /media/chris/sabrent/web-dev ~/dev/backups/
-sudo rsync -anvP /media/chris/sabrent/web-dev ~/dev/backups2/
-
-sudo rsync -anvP ~/dev/backups/web-dev /media/chris/sabrent/
-
-
-sudo rsync -anvP /media/chris/sabrent/web-dev /media/chris/TOSH_USB
-
-
-https://docs.docker.com/storage/volumes/#back-up-a-volume
-https://stackoverflow.com/questions/26331651/how-can-i-backup-a-docker-container-with-its-data-volumes
-
-docker run -v /dbdata --name dbstore ubuntu /bin/bash
-
-docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
-
-docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
-
-docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
-
-
-############
-run in proj root 
-docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/dbbackup.tar /database-data
-chris@Ox-7020:/media/chris/sabrent/web-dev$ docker run --rm  -v $(pwd):/backup ubuntu tar cvf /backup/dbbackup.tar backup//database-data
 
 
 ##############
