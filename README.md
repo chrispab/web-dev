@@ -1,29 +1,57 @@
-# FOR DATABASE EXPORT
 
-docker exec mariadb /usr/bin/mysqldump -u root --password=triathlon123 dbname > db-export-data/dbname_export.sql
+## setup steps
+1. Clone the repo
+2. Setup local hosts file
+3. Copy each website folder into www/vhosts folder
+4. Setup needed permissions
+5. modify any required configuration files/setting
+6. Start the docker container
+7. import databases
+8. done
 
-# FOR DATABASE IMPORT
 
-docker exec -i mariadb mysql -uroot -ptriathlon123 dbname < db-import-data/dbname.sql
+
+
+
+#### local host additions
+```
+127.0.0.1 dev-www.gotri.org
+127.0.0.1 dev-intranet.britishtriathlon.org
+127.0.0.1 dev-test.britishtriathlon.org
+127.0.0.1 dev-www.britishtriathlon.org
+127.0.0.1 dev-swimbikerun.britishtriathlon.org
+127.0.0.1 dev-events.britishtriathlon.org
+127.0.0.1 dev-uploads.britishtriathlon.org
+```
+#### DATABASE EXPORT
+
+`docker exec mariadb /usr/bin/mysqldump -u root --password=triathlon123 <dbname> > db-export-data/<dbname>_export.sql`
+
+#### DATABASE IMPORT
+
+`docker exec -i mariadb mysql -uroot -ptriathlon123 <dbname> < db-import-data/<dbname>.sql`
+
+`docker exec -i mariadb mysql -uroot -ptriathlon123 eos < db_import_data/sql_dump/from_dev/eos_dev_export_2023-06-29_dump.sql`
+
 
 <https://stackoverflow.com/questions/65585749/how-to-import-a-mysql-dump-file-into-a-docker-mysql-container>
 volumes:
 
 - ${PWD}/config/start.sql:/docker-entrypoint-initdb.d/start.sql
 
-# LOG INTO web server BASH
+### LOG INTO web server BASH
 
+```
 docker exec -it php-apache bash
 cd vhosts/gotri_new
+```
 
-# set perms for pimcore
+### set perms for pimcore
 
-chown -R www-data:www-data pimcore website/var
+`chown -R www-data:www-data pimcore website/var`
 
-local hosts add
-127.0.0.1 dev.gotri.org dev-intranet.britishtriathlon.org dev.test.britishtriathlon.org dev.britishtriathlon.org
 
-# useful Docker commands
+### useful Docker commands
 
 docker ps
 docker ps -all
@@ -31,9 +59,10 @@ docker ps -a
 docker compose up
 docker compose down
 
-/home/chris/dev/docker/web-dev/www/vhosts/gotri_new/website/var/config/system.php
+#### Misc
+`web-dev/www/vhosts/gotri_new/website/var/config/system.php`
 has
-
+```
 "database" => [
         "adapter" => "Pdo_Mysql",
         "params" => [
@@ -44,6 +73,6 @@ has
             "port" => "3306"
         ]
     ],
-
+```
 xdebug
 <https://stackoverflow.com/questions/49907308/installing-xdebug-in-docker>

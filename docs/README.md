@@ -1,5 +1,4 @@
 ### Setting up local hosts
-#### local host additions
 ```
 127.0.0.1 dev-www.gotri.org
 127.0.0.1 dev-intranet.britishtriathlon.org
@@ -8,8 +7,6 @@
 127.0.0.1 dev-swimbikerun.britishtriathlon.org
 127.0.0.1 dev-events.britishtriathlon.org
 127.0.0.1 dev-uploads.britishtriathlon.org
-
-
 ```
 
 -------------------------website-------------------

@@ -49,3 +49,9 @@ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /db
 run in proj root 
 docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/dbbackup.tar /database-data
 chris@Ox-7020:/media/chris/sabrent/web-dev$ docker run --rm  -v $(pwd):/backup ubuntu tar cvf /backup/dbbackup.tar backup//database-data
+
+
+##############
+when branch upto date but git lists all files as modified and ready to be commited
+https://stackoverflow.com/questions/5787937/git-status-shows-files-as-changed-even-though-contents-are-the-same
+
