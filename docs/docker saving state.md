@@ -11,12 +11,15 @@ rsync -anvP --delete ~/dev/docker/web-dev /media/chris/sabrent
 rsync -anvP --delete ~/dev/docker/web-dev /media/chris/m2
 ```
 
-h:sabrent source to backup
+### h:sabrent source to backup
+
+```BASH
 sudo rsync -anvP /media/chris/sabrent/web-dev ~/dev/backups/
 sudo rsync -anvP /media/chris/sabrent/web-dev ~/dev/backups2/
 sudo rsync -anvP /media/chris/sabrent/web-dev /media/chris/TOSH_USB
 
 sudo rsync -anvP ~/dev/backups/web-dev /media/chris/sabrent/
+```
 
 ## db data backup
 
@@ -45,12 +48,19 @@ For example, create a new container named dbstore2:
 
 Then, un-tar the backup file in the new container’s data volume:
 `docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"`
-
+docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
 
 https://stackoverflow.com/questions/26331651/how-can-i-backup-a-docker-container-with-its-data-volumes
 
 ############
-run in proj root 
-docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/dbbackup.tar /database-data
-chris@Ox-7020:/media/chris/sabrent/web-dev$ docker run --rm  -v $(pwd):/backup ubuntu tar cvf /backup/db_backup/dbbackup.tar backup/database-data
+run in proj root
 
+### backup db
+
+run in proj root
+`docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/db_backup/dbbackup.tar backup/database-data`
+
+### restore db
+
+run in proj root
+`docker run --rm -v $(pwd):/backup ubuntu bash -c "cd /backup && tar xvf /backup/db_backup/dbbackup.tar --strip 1"`
