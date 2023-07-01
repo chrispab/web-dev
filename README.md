@@ -1,13 +1,13 @@
 
 # setup steps
 
-1. Clone the repo
+1. Clone this repo
 2. Setup local hosts file
 3. Copy each website folder into www/vhosts folder
 4. Setup needed permissions
 5. modify any required configuration files/setting
 6. Start the docker container
-7. import databases
+7. import databases from sql dump files or from tar backup
 8. done
 
 ## local host additions
