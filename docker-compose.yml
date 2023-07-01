@@ -8,18 +8,18 @@ services:
       - '443:443'
       # expose:
       #   - 9000
-    working_dir: /var/www
     volumes:
       - ./www:/var/www
       - ./services/php_apache/apache/sites-enabled/site.conf:/etc/apache2/sites-available/000-default.conf
       - ./services/php_apache/ssl:/etc/apache2/ssl
       - ./services/php_apache/php/php.ini:/usr/local/etc/php/conf.d/extra-php-config.ini
-    depends_on:
-      - mariadb
+    # working_dir: /var/www
     # command: bash -c "sed -i 's/\"host\" => \"localhost\"/\"host\" => \"${DB_SERVICE_HOST_NAME}\"/' /var/www/vhosts/website/website/var/config/system.php && apache2-foreground"
     # command: bash -c setup.sh
-    entrypoint: [ "bash", "-c", "chmod +x setup.sh && sh setup.sh" ]
     # entrypoint: [ "bash", "-c", "chmod +x /scripts/rs-init.sh && sh /scripts/rs-init.sh"]
+    entrypoint: [ "bash", "-c", "chmod +x /var/www/setup.sh && sh /var/www/setup.sh" ]
+    depends_on:
+      - mariadb
     networks:
       - app-network
 
@@ -38,7 +38,7 @@ services:
     volumes:
       - ./database-data:/var/lib/mysql
       - ./services/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
-      # - ./db_import_data:/docker-entrypoint-initdb.d //import on startup
+      # - ./db_import_data:/docker-entrypoint-initdb.d #import on startup
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
       interval: 15s
