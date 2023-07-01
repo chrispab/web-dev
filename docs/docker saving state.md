@@ -23,7 +23,7 @@ sudo rsync -anvP ~/dev/backups/web-dev /media/chris/sabrent/
 
 ## db data backup
 
-https://docs.docker.com/storage/volumes/#back-up-a-volume
+<https://docs.docker.com/storage/volumes/#back-up-a-volume>
 
 ### Back up a volume
 
@@ -50,12 +50,12 @@ Then, un-tar the backup file in the new container’s data volume:
 `docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"`
 docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
 
-https://stackoverflow.com/questions/26331651/how-can-i-backup-a-docker-container-with-its-data-volumes
+<https://stackoverflow.com/questions/26331651/how-can-i-backup-a-docker-container-with-its-data-volumes>
 
 ############
 run in proj root
 
-### backup db
+### how to backup and restore db
 
 run in proj root
 `docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/db_backup/dbbackup.tar backup/database-data`
