@@ -21,6 +21,11 @@
 				"username": "root",
 				"password": "triathlon123"
 			}
-		]
+		],
+		"intelephense.environment.includePaths": [
+			"www/vhosts/website/vendor",
+			"www/vhosts/website/pimcore"
+		],
+		"intelephense.environment.phpVersion": "5.6.4"
 	}
 }
