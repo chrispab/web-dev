@@ -76,3 +76,4 @@ has
 ```
 xdebug
 <https://stackoverflow.com/questions/49907308/installing-xdebug-in-docker>
+https://dev.to/jackmiras/xdebug-in-vscode-with-docker-379l
