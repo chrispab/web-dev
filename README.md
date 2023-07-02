@@ -13,14 +13,25 @@
 ## local host additions
 
 ```BASH
+
+127.0.0.1 dev-test.britishtriathlon.org
 127.0.0.1 dev-www.gotri.org
 127.0.0.1 dev-intranet.britishtriathlon.org
-127.0.0.1 dev-test.britishtriathlon.org
 127.0.0.1 dev-www.britishtriathlon.org
 127.0.0.1 dev-swimbikerun.britishtriathlon.org
 127.0.0.1 dev-events.britishtriathlon.org
 127.0.0.1 dev-uploads.britishtriathlon.org
 ```
+## urls:
+
+http://dev-test.britishtriathlon.org
+http://127.0.0.1:8080
+https://dev-www.gotri.org
+https://dev-www.britishtriathlon.org
+https://dev-intranet.britishtriathlon.org/
+https://dev-swimbikerun.britishtriathlon.org/
+https://dev-events.britishtriathlon.org/
+
 
 ## DATABASE EXPORT
 

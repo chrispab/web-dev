@@ -171,6 +171,7 @@ git clone git@bitbucket.org:britishtriathlon/gotri_latest.git
 git submodule add git@bitbucket.org:britishtriathlon/gotri_latest.git sbr
 
 
+### add new git origin
 
 git remote add origin_bitbucket git@bitbucket.org:britishtriathlon/gotri_latest.git
 
