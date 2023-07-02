@@ -1,4 +1,5 @@
 # backups
+
 ## how to backup and restore db using tar
 
 stop the db service first
@@ -12,8 +13,6 @@ run in proj root
 
 run in proj root
 `docker run --rm -v $(pwd):/backup ubuntu bash -c "cd /backup && tar xvf /backup/db_backup/dbbackup.tar --strip 1"`
-
-
 
 ## rsync
 

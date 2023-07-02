@@ -37,12 +37,32 @@
 
 `docker exec mariadb /usr/bin/mysqldump -u root --password=triathlon123 <dbname> > db-export-data/<dbname>_export.sql`
 
-## DATABASE IMPORT
+## DATABASE IMPORT (with mariadb started)
 
 `docker exec -i mariadb mysql -uroot -ptriathlon123 <dbname> < db-import-data/<dbname>.sql`
 
 `docker exec -i mariadb mysql -uroot -ptriathlon123 eos < db_import_data/sql_dump/from_dev/eos_dev_export_2023-06-29_dump.sql`
 
+## how to backup and restore db using tar
+
+stop the db service first
+
+### backup the db to transport it
+
+run in proj root
+`docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/db_backup/dbbackup.tar backup/database-data`
+
+### restore db
+
+run in proj root
+`docker run --rm -v $(pwd):/backup ubuntu bash -c "cd /backup && tar xvf /backup/db_backup/dbbackup.tar --strip 1"`
+
+## start  stack
+
+doccker compose up
+
+---
+Notes:
 <https://stackoverflow.com/questions/65585749/how-to-import-a-mysql-dump-file-into-a-docker-mysql-container>
 volumes:
 
