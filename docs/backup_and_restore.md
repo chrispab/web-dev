@@ -1,5 +1,19 @@
-
 # backups
+## how to backup and restore db using tar
+
+stop the db service first
+
+### backup the db to transport it
+
+run in proj root
+`docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/db_backup/dbbackup.tar backup/database-data`
+
+### restore db
+
+run in proj root
+`docker run --rm -v $(pwd):/backup ubuntu bash -c "cd /backup && tar xvf /backup/db_backup/dbbackup.tar --strip 1"`
+
+
 
 ## rsync
 
@@ -14,9 +28,9 @@ rsync -anvP --delete ~/dev/docker/web-dev /media/chris/m2
 ### h:sabrent source to backup
 
 ```BASH
-sudo rsync -anvP /media/chris/sabrent/web-dev ~/dev/backups/
-sudo rsync -anvP /media/chris/sabrent/web-dev ~/dev/backups2/
-sudo rsync -anvP /media/chris/sabrent/web-dev /media/chris/TOSH_USB
+sudo rsync -anvP --delete /media/chris/sabrent/web-dev ~/dev/backups/
+sudo rsync -anvP --delete /media/chris/sabrent/web-dev ~/dev/backups2/
+sudo rsync -anvP --delete /media/chris/sabrent/web-dev /media/chris/TOSH_USB
 
 sudo rsync -anvP ~/dev/backups/web-dev /media/chris/sabrent/
 ```
@@ -54,13 +68,3 @@ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /db
 
 ############
 run in proj root
-
-### how to backup and restore db
-
-run in proj root
-`docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/db_backup/dbbackup.tar backup/database-data`
-
-### restore db
-
-run in proj root
-`docker run --rm -v $(pwd):/backup ubuntu bash -c "cd /backup && tar xvf /backup/db_backup/dbbackup.tar --strip 1"`
