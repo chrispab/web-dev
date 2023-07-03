@@ -37,7 +37,7 @@
 
 `docker exec mariadb /usr/bin/mysqldump -u root --password=triathlon123 <dbname> > db-export-data/<dbname>_export.sql`
 
-## DATABASE IMPORT (with mariadb started)
+## DATABASE IMPORT with a sql file (with mariadb started)
 
 `docker exec -i mariadb mysql -uroot -ptriathlon123 <dbname> < db-import-data/<dbname>.sql`
 

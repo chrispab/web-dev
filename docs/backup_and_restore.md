@@ -1,18 +1,30 @@
-# backups
+# Backup/Restore DBs
 
-## how to backup and restore db using tar
+## DATABASE IMPORT with a sql file (mariadb must be started)
+
+note: untar if needed
+
+`docker exec -i mariadb mysql -uroot -ptriathlon123 <dbname>/db-import-data/<dbname>.sql`
+
+`docker exec -i mariadb mysql -uroot -ptriathlon123 eos < db_import_data/sql_dump/from_dev/eos_dev_export_2023-06-29_dump.sql`
+
+---
+## How to backup and restore ALL DBs using tar (mariadb NOT running-stopped)
 
 stop the db service first
 
 ### backup the db to transport it
 
 run in proj root
-`docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/db_backup/dbbackup.tar backup/database-data`
+`docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/db_backup/database-data_backup_2023_07_03.tar backup/database-data`
 
 ### restore db
 
 run in proj root
+the destination folder '/database-data' must be emptied
 `docker run --rm -v $(pwd):/backup ubuntu bash -c "cd /backup && tar xvf /backup/db_backup/dbbackup.tar --strip 1"`
+
+---
 
 ## rsync
 

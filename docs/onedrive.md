@@ -1,5 +1,5 @@
 
-export ONEDRIVE_DATA_DIR_WORK="/home/abraunegg/OneDriveWork"
+export ONEDRIVE_DATA_DIR_WORK="/home/chris/OneDrive"
 mkdir -p ${ONEDRIVE_DATA_DIR_WORK}
 
 docker run -it --restart unless-stopped --name onedrive_Work -v onedrive_conf_Work:/onedrive/conf -v "${ONEDRIVE_DATA_DIR_WORK}:/onedrive/data" driveone/onedrive:edge
@@ -10,11 +10,16 @@ docker run -it --restart unless-stopped --name onedrive_Work -v onedrive_conf_Wo
 docker run -it --restart unless-stopped --name onedrive_Work -v onedrive_conf_Work:/onedrive/conf -v "${ONEDRIVE_DATA_DIR_WORK}:/onedrive/data" -e "ONEDRIVE_REAUTH=1" driveone/onedrive:edge
 
 
+
+export ONEDRIVE_DATA_DIR="/home/chris/OneDrive"
+
 docker run -it --name onedrive -v onedrive_conf:/onedrive/conf \
     -v "${ONEDRIVE_DATA_DIR}:/onedrive/data" \
     -e "ONEDRIVE_UID=${ONEDRIVE_UID}" \
     -e "ONEDRIVE_GID=${ONEDRIVE_GID}" \
     driveone/onedrive:edge
+
+export ONEDRIVE_DATA_DIR="/home/chris/OneDrive"
 
 docker run -it --name onedrive -v onedrive_conf:/onedrive/conf \
     -v "${ONEDRIVE_DATA_DIR}:/onedrive/data" \
