@@ -39,14 +39,31 @@ rsync -anvP --delete ~/dev/docker/web-dev /media/chris/m2
 ### h:sabrent source to backup
 
 ```BASH
+
+backup sabrent source to pc HD
+//no db backups copied - for slow usb
+sudo rsync -avhP --exclude 'db_backup/*' /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10/
+//with db backups
+sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10/
+
+
+
+backup sabrent source to work laptop HD
+sudo rsync -avhP --exclude '/media/chris/sabrent/web-dev/db_backup/*' /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10_3/
+
+sudo rsync -anvP --delete /media/chris/sabrent/web-dev ~/dev/web-dev-backups/2/
+sudo rsync -anvP --delete /media/chris/sabrent /media/chris/CRU_480_USB/
+
 sudo rsync -anvP --delete /media/chris/sabrent/web-dev ~/dev/backups/
 sudo rsync -anvP --delete /media/chris/sabrent/web-dev ~/dev/backups2/
 sudo rsync -anvP --delete /media/chris/sabrent/web-dev /media/chris/TOSH_USB
 
+sudo rsync -anvP --delete /media/chris/sabrent/web-dev ~/dev/web-dev-DC-v1
+
 sudo rsync -anvP ~/dev/backups/web-dev /media/chris/sabrent/
 ```
 
-## db data backup
+## Fancy using a volume - db data backup
 
 <https://docs.docker.com/storage/volumes/#back-up-a-volume>
 
