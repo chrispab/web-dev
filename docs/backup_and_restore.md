@@ -18,6 +18,9 @@ stop the db service first
 run in proj root
 `docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/db_backup/database-data_backup_2023_07_03.tar backup/database-data`
 
+docker run --rm -v $(pwd):/backup ubuntu tar -czvf /backup/db_backup/database-data_backup_2023_07_10_3.tar.gz backup/database-data
+
+//tar -czvf name-of-archive.tar.gz 
 ### restore db
 
 run in proj root
@@ -39,12 +42,17 @@ rsync -anvP --delete ~/dev/docker/web-dev /media/chris/m2
 ### h:sabrent source to backup
 
 ```BASH
-
 backup sabrent source to pc HD
 //no db backups copied - for slow usb
 sudo rsync -avhP --exclude 'db_backup/*' /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10/
+
 //with db backups
-sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10/
+sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10_2/
+
+
+sudo rsync -avhP /media/chris/sabrent/web-dev /media/chris/CRU_480_USB/myBackups/2023-07-10_2/
+
+sudo rsync -avhPn --delete /media/chris/sabrent/web-dev /media/chris/CRU_480_USB/
 
 
 
