@@ -18,6 +18,7 @@ stop the db service first
 run in proj root
 `docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/db_backup/database-data_backup_2023_07_03.tar backup/database-data`
 
+compressed
 docker run --rm -v $(pwd):/backup ubuntu tar -czvf /backup/db_backup/database-data_backup_2023_07_10_3.tar.gz backup/database-data
 
 //tar -czvf name-of-archive.tar.gz 
