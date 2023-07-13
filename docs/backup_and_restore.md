@@ -8,8 +8,12 @@ note: untar if needed
 
 `docker exec -i mariadb mysql -uroot -ptriathlon123 eos < db_import_data/sql_dump/from_dev/eos_dev_export_2023-06-29_dump.sql`
 
+### survey DB import
+`docker exec -i mariadb mysql -uroot -ptriathlon123 eos < db_import_data/sql_dump/from_live/survey_dump/survey_live_export_2023-07-12_dump.sql`
+
+
 ---
-## How to backup and restore ALL DBs using tar (mariadb NOT running-stopped)
+## How to backup and restore ALL DBs using tar.gz (mariadb NOT running-stopped)
 
 stop the db service first
 
@@ -21,7 +25,14 @@ run in proj root
 compressed
 docker run --rm -v $(pwd):/backup ubuntu tar -czvf /backup/db_backup/database-data_backup_2023_07_10_3.tar.gz backup/database-data
 
-//tar -czvf name-of-archive.tar.gz 
+
+docker run --rm -v $(pwd):/backup ubuntu tar -czvf /backup/db_backup/database-data_backup_2023_07_11.tar.gz backup/database-data
+
+//tar -czvf name-of-archive.tar.gz  <source_folder>
+
+tar -czvf web-dev-2023-07-12.tar.gz  web-dev
+
+
 ### restore db
 
 run in proj root
@@ -43,12 +54,17 @@ rsync -anvP --delete ~/dev/docker/web-dev /media/chris/m2
 ### h:sabrent source to backup
 
 ```BASH
-backup sabrent source to pc HD
+backup sabrent source to pc HD myBackups
 //no db backups copied - for slow usb
 sudo rsync -avhP --exclude 'db_backup/*' /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10/
 
 //with db backups
-sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10_2/
+sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-11/
+
+
+//copy sabrent src to laptop working folder
+sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/
+
 
 
 sudo rsync -avhP /media/chris/sabrent/web-dev /media/chris/CRU_480_USB/myBackups/2023-07-10_2/

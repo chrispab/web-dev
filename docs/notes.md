@@ -27,3 +27,8 @@ https://stackoverflow.com/questions/5787937/git-status-shows-files-as-changed-ev
 https://dev-www.britishtriathlon.org/my-account/online-entry?raceItem=48997
 
 /media/chris/sabrent/web-dev/tools/php-cs-fixer-v3.phar
+
+
+find . -type f -exec du -ah {} + | grep -v "/$" | sort -rh | head -20
+
+sudo truncate --size 0 gotri_old.log
