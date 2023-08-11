@@ -5,27 +5,6 @@
 		}
 	],
 	"settings": {
-		"sqltools.connections": [
-			{
-				"mysqlOptions": {
-					"authProtocol": "default",
-					"enableSsl": "Disabled"
-				},
-				"previewLimit": 50,
-				"server": "127.0.0.1",
-				"port": 33016,
-				"driver": "MySQL",
-				"name": "dev-btf",
-				"group": "btf",
-				"database": "btf_test",
-				"username": "root",
-				"password": "triathlon123"
-			}
-		],
-		"intelephense.environment.includePaths": [
-			"www/vhosts/website/vendor",
-			"www/vhosts/website/pimcore"
-		],
-		"intelephense.environment.phpVersion": "5.6.4"
+		"intelephense.environment.phpVersion": "5.6.40"
 	}
 }

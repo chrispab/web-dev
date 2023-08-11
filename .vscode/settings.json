@@ -1,6 +1,10 @@
 {
     "intelephense.environment.documentRoot": "www/vhosts",
     "intelephense.environment.includePaths": [
-        "www/vhosts"
-    ]
+        "${workspaceFolder}/www/vhosts/website",
+        "${workspaceFolder}/www/vhosts/lib",
+        "${workspaceFolder}/www/vhosts/intranet",
+        "${workspaceFolder}/www/vhosts/eos",
+        "${workspaceFolder}/www/vhosts/website/vendor/zendframework"
+    ],
 }

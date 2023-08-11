@@ -8,20 +8,49 @@ note: untar if needed
 
 `docker exec -i mariadb mysql -uroot -ptriathlon123 eos < db_import_data/sql_dump/from_dev/eos_dev_export_2023-06-29_dump.sql`
 
+### survey DB import
+`docker exec -i mariadb mysql -uroot -ptriathlon123 eos < db_import_data/sql_dump/from_live/survey_dump/survey_live_export_2023-07-12_dump.sql`
+
+
 ---
-## How to backup and restore ALL DBs using tar (mariadb NOT running-stopped)
 
-stop the db service first
+## How to backup and restore ALL DBs using tar.gz (mariadb NOT running-stopped)
 
-### backup the db to transport it
 
-run in proj root
-`docker run --rm -v $(pwd):/backup ubuntu tar cvf /backup/db_backup/database-data_backup_2023_07_03.tar backup/database-data`
+### create a compressed database backup - ensure db container is not running - run commands from web-dev root folder
 
-compressed
-docker run --rm -v $(pwd):/backup ubuntu tar -czvf /backup/db_backup/database-data_backup_2023_07_10_3.tar.gz backup/database-data
 
-//tar -czvf name-of-archive.tar.gz 
+```bash
+#Stops the db container
+#Maps web-dev root folder to /backup folder in ubuntu container, container runs, then executes tar command <destination file> <source folder>
+
+docker stop mariadb
+docker run --rm -v $(pwd):/backup ubuntu tar -czvf /backup/db_backup/database-data_backup_2023_08_11.tar.gz backup/database-data
+```
+
+#### backup laptop/pv dev/web-dev to usb backup drive
+
+```bash
+#to backup rsync web-dev folder (with delete)
+sudo rsync -zavhP --delete /home/chris/dev/web-dev /media/chris/work_backup/work_laptop_ubuntu_20/current_web_dev/
+or
+sudo rsync -zavhP --delete $HOME/dev/web-dev /media/$USER/work_backup/work_laptop_ubuntu_20/current_web_dev/
+```
+
+#### then restore backup to pc/laptop dev/web-dev from usb backup drive
+
+```bash
+-to restore rsync web-dev folder (with delete)
+
+sudo rsync -zavnhP --delete /media/$USER/work_backup/work_laptop_ubuntu_20/current_web_dev/web-dev $HOME/dev/ 
+```
+
+```bash
+//tar -czvf name-of-archive.tar.gz  <source_folder>
+
+tar -czvf web-dev-2023-07-12.tar.gz  webdev
+```
+
 ### restore db
 
 run in proj root
@@ -35,20 +64,34 @@ the destination folder '/database-data' must be emptied
 ```bash
 rsync -anvP ~/dev/docker/web-dev /media/chris/sabrent
 
+$ from laptop to new portable ubuntu 240gb drive:
+sudo rsync -anvP ~/dev/web-dev /media/chris/c58a6611-26d6-4664-88fe-061ce88d197b/home/chris/dev
+
+
 rsync -anvP --delete ~/dev/docker/web-dev /media/chris/sabrent
 
 rsync -anvP --delete ~/dev/docker/web-dev /media/chris/m2
 ```
 
+
+laptop web-dev to mybackups web-dev
+sudo rsync -avhP ~/dev/web-dev ~/dev/myBackups/2023-08-11/
+
 ### h:sabrent source to backup
 
 ```BASH
-backup sabrent source to pc HD
+
+backup sabrent source to pc HD myBackups
 //no db backups copied - for slow usb
 sudo rsync -avhP --exclude 'db_backup/*' /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10/
 
 //with db backups
-sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10_2/
+sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-11/
+
+
+//copy sabrent src to laptop working folder
+sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/
+
 
 
 sudo rsync -avhP /media/chris/sabrent/web-dev /media/chris/CRU_480_USB/myBackups/2023-07-10_2/
