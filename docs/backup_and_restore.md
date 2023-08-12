@@ -13,32 +13,7 @@ note: untar if needed
 
 
 ---
-
 ## How to backup and restore ALL DBs using tar.gz (mariadb NOT running-stopped)
-
-
-### create a compressed database backup - ensure db container is not running - run commands from web-dev root folder
-
-
-```bash
-#Stops the db container
-#Maps web-dev root folder to /backup folder in ubuntu container, container runs, then executes tar command <destination file> <source folder>
-
-docker stop mariadb
-docker run --rm -v $(pwd):/backup ubuntu tar -czvf /backup/db_backup/database-data_backup_2023_08_12.tar.gz backup/database-data
-```
-
-#### backup laptop/pv dev/web-dev to usb backup drive
-
-```bash
-#to backup rsync web-dev folder (with delete)
-sudo rsync -zavhP --delete /home/chris/dev/web-dev /media/chris/work_backup/work_laptop_ubuntu_20/current_web_dev/
-or
-sudo rsync -zavhP --delete $HOME/dev/web-dev /media/$USER/work_backup/work_laptop_ubuntu_20/current_web_dev/
-```
-
-
-#### then restore backup to pc/laptop dev/web-dev from usb backup drive
 
 ```bash
 -to rsync web-dev folder (with delete)
@@ -51,6 +26,14 @@ sudo rsync -zavnhP --delete /media/$USER/work_backup/work_laptop_ubuntu_20/curre
 
 tar -czvf web-dev-2023-07-12.tar.gz  webdev
 ```
+
+
+docker run --rm -v $(pwd):/backup ubuntu tar -czvf /backup/db_backup/database-data_backup_2023_07_11.tar.gz backup/database-data
+
+//tar -czvf name-of-archive.tar.gz  <source_folder>
+
+tar -czvf web-dev-2023-07-12.tar.gz  web-dev
+
 
 ### restore db
 
@@ -81,18 +64,12 @@ sudo rsync -avhP ~/dev/web-dev ~/dev/myBackups/2023-08-11/
 ### h:sabrent source to backup
 
 ```BASH
-
 backup sabrent source to pc HD myBackups
 //no db backups copied - for slow usb
 sudo rsync -avhP --exclude 'db_backup/*' /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10/
 
 //with db backups
-sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-11/
-
-
-//copy sabrent src to laptop working folder
-sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/
-
+sudo rsync -avhP /media/chris/sabrent/web-dev ~/dev/myBackups/2023-07-10_2/
 
 
 sudo rsync -avhP /media/chris/sabrent/web-dev /media/chris/CRU_480_USB/myBackups/2023-07-10_2/
