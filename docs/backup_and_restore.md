@@ -25,7 +25,7 @@ note: untar if needed
 #Maps web-dev root folder to /backup folder in ubuntu container, container runs, then executes tar command <destination file> <source folder>
 
 docker stop mariadb
-docker run --rm -v $(pwd):/backup ubuntu tar -czvf /backup/db_backup/database-data_backup_2023_08_11.tar.gz backup/database-data
+docker run --rm -v $(pwd):/backup ubuntu tar -czvf /backup/db_backup/database-data_backup_2023_08_12.tar.gz backup/database-data
 ```
 
 #### backup laptop/pv dev/web-dev to usb backup drive
@@ -37,10 +37,11 @@ or
 sudo rsync -zavhP --delete $HOME/dev/web-dev /media/$USER/work_backup/work_laptop_ubuntu_20/current_web_dev/
 ```
 
+
 #### then restore backup to pc/laptop dev/web-dev from usb backup drive
 
 ```bash
--to restore rsync web-dev folder (with delete)
+-to rsync web-dev folder (with delete)
 
 sudo rsync -zavnhP --delete /media/$USER/work_backup/work_laptop_ubuntu_20/current_web_dev/web-dev $HOME/dev/ 
 ```
